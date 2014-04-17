@@ -1,0 +1,50 @@
+{%extends 'blog/base.html'%}
+{% load staticfiles %}
+
+{%block titleblock%}{{entry.title|title}} | Jason Liu{%endblock%}
+{%block headblock%}
+    {% if entry.has_math%}
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    {%endif%}
+    {% if entry.has_code%}
+        <link rel="stylesheet" href={% static 'stylesheets/github.css' %}>
+        <script src={% static 'js/highlight.pack.js'%}></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    {%endif%}
+{%endblock%}
+{%block body_block%}
+<article class="content">
+    <header class="content" id=post-header>
+    <time datetime="{{entry.start_date|date:"Y-m-d"}}" pubdate> {{entry.start_date|date:"b d"|title}}</time>
+    <h1>{{ entry.title |title }}</h1>
+    </header>
+    {%if entry.image%} <img src="/media/{{entry.image}}" alt="{{ entry.title|title }}"> {%endif%}
+    {{entry.content_html|safe}}
+
+</article>
+{# more posts #}
+
+<div class="more-posts">
+    <div class="left"> {%if prev%} Previous<br>
+        <span><a href="{{ prev.urllink }}" class="nostyle" title="{{ prev.title }}">{{ prev.title }}</a></span> {%endif%}
+    </div>
+
+    <div class="right"> {%if next%} Next<br>
+        <span><a href="{{ next.urllink }}" class="nostyle" title="{{ next.title }}">{{ next.title }}</a></span> {%endif%}
+    </div>
+</div>
+ <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'Jxnlco'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+{%endblock%}

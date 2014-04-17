@@ -1,0 +1,532 @@
+@import "compass/utilities/general/float";
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/css3/transition";
+@import "compass/typography/lists/inline-list";
+
+$gray:#bdc3c7;
+
+@mixin left-border {
+    border-left: 5px lighten($gray,8%) solid;
+    margin-left: -1rem;
+    padding-left: 1rem !important;
+    margin-bottom: 1rem;
+    line-height: 1.3em;
+    overflow: auto;
+    @include breakpoint(md) {
+        margin-left: 0rem;
+        padding-left: .3rem;
+    }
+}
+
+@mixin breakpoint($point) { @if $point == bg { @media (max-width: 1440px), (max-device-width: 1440px) { @content; } } @else if $point == md { @media (max-width: 775px), (max-device-width: 775px) { @content; } } @else if $point == sm { @media (max-width: 650px), (max-device-width: 650px) { @content; } } } 
+
+@mixin fix-width {
+    width: $width;
+    margin: auto;
+    @include breakpoint(md) {
+        width: 90%;
+        width: calc(100%-50px);
+    }
+}
+
+$bg: #fafafa;
+$hl: #e74c3c;
+$blk: black;
+$red: #E74C3C; 
+
+$width: 750px;
+
+html {
+    font-size: 18px;
+    font-family: 'Mercury SSm A', 'Mercury SSm B', Georgia, serif;
+    font-style: normal;
+    background-color: $bg;
+    color: $blk;
+}
+h1{
+    padding-top: 0em !important;
+}
+h1, h2, h3, h4, h5 {
+    font-family: 'Mercury SSm A', 'Mercury SSm B', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.618em;
+    padding-top: 1em;
+    @include breakpoint(sm) {
+        font-size: 1em;
+    }
+}
+h4, h5{
+    font-size:1em;
+}
+p{
+    font-weight: 400; 
+    font-style: normal;
+    margin-bottom: 0.618em;
+    margin-top: 0.618em;
+    line-height: 1.55em;
+}
+
+i, em{ font-style: italic; }
+
+b, strong{ font-weight: 700; }
+
+a {
+    @include transition-property(color, border-color);
+    @include transition-duration(300ms);
+    @include transition-timing-function(ease);
+    color: $blk;
+    border-bottom: 1px $blk solid;
+    padding-bottom: -3px;
+    text-decoration: none;
+    //font-family: Book;
+    &:hover { color: $red; }
+}
+ul, ol, dl{
+  line-height: 1.618em;
+  margin-left: 5%;
+}
+a.nostyle {
+    border: none;
+}
+pre code, blockquote {
+    @include left-border;
+}
+blockquote {
+    font-weight: 300;
+    p{
+        margin: 0em 0em 0em 0em;
+        color: darken($gray,30%);
+        font-size: 1.618em;
+    }
+}
+code {
+    font-family: "source-code-pro",Monaco,monospace;
+    padding: 3px;
+    font-size: 1em;
+}
+pre{
+    @include breakpoint(sm){
+        font-size: .618em;
+    }
+}
+p.desc{ 
+    font-size: .618em;
+    margin-top: 1.618em;
+}
+time{
+    font-family: 'Gotham SSm A', 'Gotham SSm B';
+    font-size: .618rem;
+    font-weight: 400; 
+    font-style: normal;
+    color: $gray;
+}
+img {
+    width: 110%;
+    margin-left: -5%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    @include breakpoint(md) {
+        width: 100%;
+        margin-left: auto;
+    }
+}
+// Blog List Views
+#single-entry p.desc, time{
+    display: block;
+    margin-top: 0.3rem !important;
+    margin-bottom: 0.3rem;
+}
+// top teacher,
+header.main {
+    @include fix-width;
+    display: block;
+    font-family: 'Gotham SSm A', 'Gotham SSm B';
+    position: relative;
+    font-size: 25px;
+}
+// Logo
+.logo-container {
+    width: 100px;
+    font-weight: 900; 
+    text-align: center;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    display: inline-block;
+    background-color: $blk;
+    color: $bg;
+    z-index: 999;
+}
+// Navigation from the top right
+a#logo{
+    z-index: 999;
+}
+nav.main {
+    @include float-right;
+    top: 1.6em;
+    right: 0;
+    font-weight: 700;
+    position: absolute;
+    width: 100%;
+    ul {
+        @include float-right;
+        font-size: .618em; 
+    }
+    li {
+        display: inline;
+        margin-left: .618rem !important;
+        @include breakpoint(sm){ margin-left: .3rem; }
+        &:last-child{ margin-right: 0rem; }
+        a{
+            padding: 5vh;
+            font-weight: 700; 
+            &:last-child{ padding-right: 0em; }
+            @include breakpoint(sm){ padding: 1.5vh; }
+        }
+    }
+}
+// Main Body content for website
+article.content, div.content {
+    @include fix-width;
+    min-height: 65vh;
+    position: relative;
+    top: 6rem;
+    margin-bottom: 3rem;
+    // Header:
+        // Time, Title, Desc
+    header.content {
+        margin-top: -2em;
+        font-size: 1.618em;
+        padding-bottom: .3rem;
+    }
+    // Blog Header for list view
+    header#single-entry{
+        margin-top: 0;
+        margin-bottom: 1em;
+        &:first-child{
+            margin-top:-2em;
+        }
+    }
+    // Ordered and unorderd lists from Markdown
+    ul, ol{
+        width: 85%;
+        @include breakpoint(sm){
+            margin-left: 10%;
+        }
+    }
+    ul {
+        list-style-type: disc;
+    }
+    ol{
+        list-style-type: decimal;
+    }
+}
+// Definition Lists from Markdown
+dl{
+  dt{
+    margin-left: 2vh;
+    font-weight: 700;
+  }
+  dd{
+    margin-left: 2vh;
+    margin-bottom: .618em;
+  }
+}
+// Footnotes from Markdown
+div.footnote{
+  font-size: .618em;
+  color: darken($gray, 20%);
+  hr{
+  display: none;
+  }
+}
+// Table on Contents from Markdown
+div.toc{
+    background-color: lighten($gray,18%);
+    padding-top: .5em;
+    padding-bottom: 0.5em;
+    color: darken($gray, 18%);
+    ul { counter-reset: item }
+    li { display: block }
+    li:before { content: counters(item, ".") " "; counter-increment: item }
+  ul{
+    list-style-type: decimal;
+  }
+  a{
+    border-bottom: none !important;
+  }
+}
+
+// Styles for the next and previous buttons
+div.more-posts {
+    @include fix-width;
+    font-family: 'Gotham SSm A', 'Gotham SSm B';
+    margin:auto;
+    font-weight: 400; 
+    position: relative;
+    display: table;
+    top: 6rem;
+    font-size: .8em;
+    line-height: 1.618em;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-top: 1px solid $gray;
+    border-bottom: 1px solid $gray;
+    *{border:None} 
+    span>a { font-weight: 700; }
+    .left { @include float-left; width: 40%; }
+    .right { @include float-right; text-align: right; width: 40%;
+    }
+}
+.MathJax, .MathJax_Display { }
+// Comments Styling
+#disqus_thread {
+    position: relative;
+    top: 7em;
+    margin-bottom: 14em;
+    @include fix-width;
+}
+footer {
+    line-height: 3.4em;
+    font-family: 'Gotham SSm A', 'Gotham SSm B';
+    font-style: normal;
+    font-size: 17px;
+    font-weight: 700;
+    width: $width + 10px;
+    height: 230px;
+    margin: auto;
+    padding: 1rem 1rem 0rem 1rem;
+    margin-top: 12em;
+    color: lighten($blk, 90%);
+    background-color: $blk;
+    text-align: center;
+    position: relative;
+    nav{
+        margin-top: 10px !important;
+    }
+    @include breakpoint(md) {
+        width: 100%;
+        padding: 0; margin: 0;
+        padding-top: 2.5rem;
+        margin-top: 12rem;
+    }
+    @include breakpoint(sm) {
+        width: 100%;
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+    em {
+        font-size: .6em;
+        font-weight: 400;
+        font-style: normal;
+        display: block;
+        color: lighten($blk, 50%);
+        @include breakpoint(sm) {
+            font-size: .45em;
+        }
+    }
+    a#dribbble:hover {
+        color: #f54ba6;
+    }
+    a#twitter:hover {
+        color: #4ba7f5;
+    }
+    a {
+        display: block;
+        color: inherit;
+        &:hover {
+            color: #919191;
+        }
+    }
+    nav {
+        margin: auto;
+        width: 700px;
+        @include breakpoint(md) {
+            width: 100%;
+        }
+    }
+    ul {
+        text-align: left;
+        display: inline-block;
+        padding-left: 10%;
+        padding-right: 10%;
+        margin-left: 0 !important;
+        line-height: 3em !important;
+        @include breakpoint(md) {
+            padding-left: 4%;
+            padding-right: 4%;
+        }
+    }
+}
+div.list_of_posts {
+    @include delimited-list(" // ");
+    line-height: 1.6em;
+    font-weight: 700;
+    ul { margin-left: 0em; }
+}
+.img_container {
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: .3rem;
+    @include breakpoint(md) {
+        height: auto;
+        margin-bottom: .1rem;
+        overflow: auto;
+    }
+}
+
+div.row {
+    width: 110%;
+    margin-left: -5%;
+    margin-top: -1.2em;
+    margin-top: 1.618em;
+    @include breakpoint(md) {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    ul {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    font-size: .6em;
+    li {
+        width: 32%;
+        position: relative;
+        display: inline-block;
+        margin: auto;
+        padding-bottom: 1em;
+
+        @include breakpoint(md) {
+            width: 100%;
+            padding-bottom: 1.6em;
+            font-size: 1.6em;
+        }
+
+        img, h1, p {
+            margin: auto;
+            font-size: 1.2em;
+            line-height: 1em;
+        }
+        img {
+            margin-top: 0;
+            padding-top: 0;
+            max-width: 100%; 
+            padding-bottom: .6em;
+        }
+        p {
+            font-weight: 300;
+        }
+    }
+    li#center {
+        padding-left: 10px;
+        padding-right: 10px;
+        @include breakpoint(md) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+
+.resume-header{
+    font-size: 1rem;
+    *{
+        line-height: 1.618em;
+        font-size: 1em;
+    }
+    h1,h2{
+        padding-top:0em;
+        font-size: 1em;
+    }
+    .title{
+        font-size: 1.618em;
+        padding-bottom:1em;
+    }
+    .subtitle{
+        font-size: 1em;
+    }
+    .info{
+        line-height: 1em;
+    }
+    p{
+        margin-top:0; margin-bottom: 0;
+    }
+    section>ul>li{
+        font-size: .9em;
+        line-height: 1.3em;
+    }
+}
+
+.resume{
+    ul>li{
+        padding-bottom: .618em;
+    }
+    h1,h2,h3{
+        font-family: "gotham ssm a"
+    }
+    font-family: "gotham ssm a"
+}
+
+.resume-topic{
+    margin-top:1em;
+    margin-bottom:1em;
+    font-size: 1rem;
+    margin-left: 5%;
+    width: 90%;
+    h1{
+        font-size:1em;
+    }
+    .desc-top{
+        font-size: .9em;
+        ul>li{
+            line-height: 1.2em;
+            p{
+                margin-top:0; margin-bottom: 0;
+            }
+        }
+        h1{
+            font-size: 1em;
+            margin-left: 0%;
+        }
+        ul{
+            margin-top:1em;
+        }
+    }
+}
+.resume-experience{
+    .name{
+        font-size: 1em;
+    }
+    .org, .loc{
+        display: inline-block;
+        margin-top: 0em;
+        font-size: 0.618em;
+        color: $gray;
+    }
+    small{
+        display: inline-block;
+        margin-top: .618em;
+        @include float-right;
+        font-size: .618rem;
+        color: $gray;
+    }
+    .desc{
+        font-size: .9em;
+        color: darken($gray, 70%);
+        ul>li{
+            line-height: 1.3em;
+        }
+        h1{
+            font-size: 1em;
+            margin-left: 0%;
+            margin-bottom: .618em;
+        }
+    }
+}
+::selection {
+    background: lighten($red,10%) /* Safari */;
+    }
+::-moz-selection {
+    background: lighten($red,10%) /* Safari */;
+}

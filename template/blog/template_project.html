@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+{% block titleblock %}Projects | Jason Liu{% endblock %}
+{% block body_block %}
+<div class="content">
+  <header class="content">
+    <h1>Projects</h1>
+    <p class="desc">
+        This is a collection of all the work that I am proud of. This includes various illustrations and artwork that I've done over the years along with experiments and product designs. My earlier work mainly consists of projects I've done for <a href='http/cyberarts.ca' title='CyberARTS Highschool Programme'> CyberARTS </a> while more recently work will probably have come from hackathons and collaborations with my peers.</p>
+  </header>
+  <p>I've been learning how to programm and design for web so definitly expect more programming, data, and physics in the future. If you want to get in touch, send me a <a href="https://twitter.com/jxnlco">tweet</a> If you hate me, you can also send and email to jason at this domain.</p>
+  {%for mini_list in projects_list%}
+  <div class="row">
+    <ul>
+      {%for entry in mini_list%}
+      {% if forloop.counter|divisibleby:"2" %}
+      <li id="center">
+      {% else %}
+      <li>
+      {% endif %}
+      <a href="{{ entry.urllink }}" class="nostyle" title="{{entry.title|title}}:{{entry.desc}}">
+        <div class="img_container">
+          <img src="/media/{{entry.image}}" alt="">
+        </div>
+        <h1>{{entry.title|title}}</h1>
+        <p>{{entry.desc}}</p>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {%endfor%}
+</div>
+{% endblock %}

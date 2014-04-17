@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% block titleblock %}Blog | Jason Liu{% endblock %}
+
+{% block body_block %}
+<div class="content">
+    {%for entry in cur_term.posts.all%}
+        {%if entry.style == 'writing'%}
+        <header class="content" id="single-entry">
+        <time datetime="{{entry.start_date|date:"Y-m-d"}}" pubdate> {{entry.start_date|date:"b d"|title}}</time>
+        <a href="{{entry.urllink}}" class="nostyle" title="{{entry.title|title}}:{{entry.desc}}">
+            <h1 class="title">{{entry.title|title}}</h1></a>
+            <p class="desc">{{entry.desc}}</p>
+        </header>
+        {% endif %}
+    {% endfor%}
+</div>
+{# more posts #}
+<div class="more-posts">
+    <div class="left"><a href="/">Most Recent</a><br>
+        <span><a href="/" class="nostyle" title="Home">{{recent_entry.title|title}}</a></span>
+    </div>
+    <div class="right"><a href="/archive/">Archives</a><br>
+        <span><a href="/archive/" class="nostyle" title="{{cur_term.name|title}}">{{cur_term.name|title}}</a></span>
+    </div>
+</div>
+{% endblock %}

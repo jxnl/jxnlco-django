@@ -1,0 +1,49 @@
+{%extends 'blog/base.html'%}
+{% load staticfiles %}
+
+{%block titleblock%}Resume | Jason Liu{%endblock%}
+{%block body_block%}
+<article class="content resume">
+    <header class="resume-header">
+    <h1 class="title">{{ resume.title |title }}</h1>
+    <section class="info">
+        <h2 class='subtitle'>{{resume.subtitle|safe}}</h2>
+        <!-- <address>
+            {% if resume.address_1 %}{{resume.address_1}}{% endif %}
+            {% if resume.address_2 %}{{resume.address_2}}{% endif %}
+        </address> -->
+        <p><a href="mailto:{{resume.email}}" class="nostyle">{{resume.email}}</a> / {{resume.phone_number}}</p>
+    </section>
+    <section class="resume-about">
+        <h3 class="purpose">Purpose</h3>
+        <p class="purpose">{{resume.purpose}}</p>
+        <h3 class="skills">Skills</h3>
+        {{resume.skills_html|safe}}
+    </section>
+    </header>
+    {% for topic in resume.topics.all %}
+    <section class="resume-topic">
+    <h1>{{topic.title|upper}}</h1>
+    <div class="desc-top"> {% if topic.desc %}{{topic.desc_html|safe}}{% endif %}</div>
+        {% for exp in topic.listing.all %}
+        <section class="resume-experience">
+            <h2 class="name">{{exp.name}}</h2>
+            <small class="time">{{ exp.start_date|date:"b d"|title}} &mdash;
+            {% if exp.end_date %}
+                {{ exp.end_date|date:"b d"|title}}</small>
+            {% else %}
+                Present</small>
+            {% endif %}
+            <p class="org">{{exp.organization}}</p><p class="loc">, {{exp.location}}</p>
+            <div class="desc">
+                {{ exp.desc_html|safe}}
+            </div>
+        </section>
+        {% endfor %}
+
+    </section>
+    {% endfor%}
+</article>
+{# more posts #}
+
+{%endblock%}

@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <link rel="apple-touch-icon" sizes="57x57" href={% static "favicons/apple-touch-icon-57x57.png"%}>
+        <link rel="apple-touch-icon" sizes="114x114" href={% static "favicons/apple-touch-icon-114x114.png"%}>
+        <link rel="apple-touch-icon" sizes="72x72" href={% static "favicons/apple-touch-icon-72x72.png"%}>
+        <link rel="apple-touch-icon" sizes="144x144" href={% static "favicons/apple-touch-icon-144x144.png"%}>
+        <link rel="apple-touch-icon" sizes="60x60" href={% static "favicons/apple-touch-icon-60x60.png"%}>
+        <link rel="apple-touch-icon" sizes="120x120" href={% static "favicons/apple-touch-icon-120x120.png"%}>
+        <link rel="apple-touch-icon" sizes="76x76" href={% static "favicons/apple-touch-icon-76x76.png"%}>
+        <link rel="apple-touch-icon" sizes="152x152" href={% static "favicons/apple-touch-icon-152x152.png"%}>
+        <link rel="icon" type="image/png" href={% static "favicons/favicon-196x196.png"%} sizes="196x196">
+        <link rel="icon" type="image/png" href={% static "favicons/favicon-160x160.png"%} sizes="160x160">
+        <link rel="icon" type="image/png" href={% static "favicons/favicon-96x96.png"%} sizes="96x96">
+        <link rel="icon" type="image/png" href={% static "favicons/favicon-16x16.png"%} sizes="16x16">
+        <link rel="icon" type="image/png" href={% static "favicons/favicon-32x32.png"%} sizes="32x32">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6472672/799624/css/fonts.css" />
+        <meta name="viewport" content="initial-scale=1, width=device-width"> <title> {% block titleblock %} {% endblock %} </title>
+        <link rel="stylesheet" href={% static 'stylesheets/screen.css' %}>
+        {% block headblock %}{% endblock %}
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-48331400-3']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+              ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';  
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+          </script>
+    </head>
+
+    <header class="main">
+      <a href="/" id="logo" title="Home"><div class="logo-container">jaso<br>nliu</div></a>
+      <nav class="main">
+        <ul class="main">
+          <li id="blog"><a href="/blog/" class="nostyle" title="Blog">Blog</a></li>
+          <li id="porfolio"><a href="/projects" class="nostyle" title="Projects">Projects</a></li>
+          <li id="about"><a href="/about/" class="nostyle" title="About Me">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    {% block body_block%}{% endblock %}
+    <footer>
+      <nav>
+        <div class="link">
+          <ul id="extra">
+            <li><a href="/about/" title="About Me">About</a></li>
+            <li><a href="http://www.loveandscienceshow.com" title="Love and Science">Podcast</a></li>
+            <li><a href="/archive/" title="Archives">Archives</a></li>
+          </ul>
+          <ul id="social">
+            <li><a href="https://github.com/jxnl" title="Github">Github</a></li>
+            <li><a href="http://dribbble.com/jxnl" id="Dribbble" title="Dribbble">Dribbble</a></li>
+            <li><a href="https://twitter.com/jxnlco" id="Twitter" title="Twitter">Twitter</a></li>
+          </ul>
+          <ul id="blog">
+            <li><a href="/blog/" title="Blog">Writing</a></li>
+            <li><a href="/projects/" title="Projects">Projects</a></li>
+            <li><a href="/notes/" title="Notes">Notes</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="copyright">
+          <em>Copyright Jason Liu © 2014 | Powered by Django | Hosted on DigitalOcean</em>
+      </div></footer>
+
+  </body>
+</html>

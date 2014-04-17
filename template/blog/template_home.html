@@ -1,0 +1,31 @@
+{%extends 'blog/base.html'%}
+{% load staticfiles %}
+
+{%block titleblock%}Jason Liu{%endblock%}
+{%block headblock%}
+    {% if entry.has_math%}
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    {%endif%}
+    {% if entry.has_code%}
+    <link rel="stylesheet" href={% static 'stylesheets/github.css' %}>
+        <script src= {% static 'js/highlight.pack.js'%}></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    {%endif%}
+{%endblock%}
+{%block body_block%}
+    <article class="content">
+        <header class="content">
+        <time datetime="{{ entry.start_date|date:"Y-m-d" }}" pubdate>{{entry.start_date|date:"b d"|title}}</time>
+            <h1 class="title">{{entry.title |title}}</h1>
+            {% if entry.image %} <img src='media/{{entry.image}}' alt="{{ entry.title|title }}"> {% endif %}
+        </header>
+        {{ entry.content_html|safe }}
+    </article>
+    {# more posts #}
+    <div class="more-posts">
+        <div class="left"></div>
+        <div class="right"><a href="/blog/">More Posts</a><br>
+            <span><a href="/blog/" title="{{term.name}}:{{term.desc}}">{{term.name}}</a></span>
+        </div>
+    </div>
+{% endblock %}
